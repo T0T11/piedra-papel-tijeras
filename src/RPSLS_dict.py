@@ -21,7 +21,7 @@ class GameResult(IntEnum):
     Tie = 2
 
 
-# user_action gana a estas dos
+# user_action gana a estas  visto desde la posicion del usuarios
 _WINS_AGAINST = {
     GameAction.Rock: {GameAction.Scissors, GameAction.Lizard},
     GameAction.Paper: {GameAction.Rock, GameAction.Spock},
@@ -30,7 +30,7 @@ _WINS_AGAINST = {
     GameAction.Lizard: {GameAction.Spock, GameAction.Paper},
 }
 
-# Mensajes (solo para consola)
+# Mensajes (solo para consola) visto desde la posicion del usuarios
 _WIN_MESSAGES = {
     (GameAction.Rock, GameAction.Scissors): "Rock crushes scissors.",
     (GameAction.Rock, GameAction.Lizard): "Rock crushes lizard.",
@@ -61,7 +61,7 @@ class Game:
     def get_user_action(self) -> GameAction:
         choices = ", ".join(f"{a.name}[{a.value}]" for a in GameAction)
         raw = input(f"\nPick a choice ({choices}): ").strip()
-        try:
+        try: # evita romper valor no valido
             return GameAction(int(raw))
         except Exception:
             raise ValueError
